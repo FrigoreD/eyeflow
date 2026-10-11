@@ -1,7 +1,3 @@
-//
-// Created by aagapov on 11.10.2026.
-//
-
 #ifndef EYEFLOW_DOTWIDGET_H
 #define EYEFLOW_DOTWIDGET_H
 #include <QWidget>

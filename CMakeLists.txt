@@ -8,12 +8,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(CMAKE_AUTOMOC ON)
 
-add_executable(eyeflow main.cpp
-        dotwidget/dotwidget.cpp
-        dotwidget/dotwidget.h
-        motion/motion.cpp
-        motion/motion.h
+add_executable(eyeflow src/main.cpp
+        src/dotwidget/dotwidget.cpp
+        src/dotwidget/dotwidget.h
+        src/motion/motion.cpp
+        src/motion/motion.h
 )
 target_link_libraries(eyeflow PRIVATE Qt6::Widgets)
 target_compile_options(eyeflow PRIVATE -Wall -Wextra -Wconversion -Wshadow)
-target_include_directories(eyeflow PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(eyeflow PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

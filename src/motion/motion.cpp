@@ -1,7 +1,3 @@
-//
-// Created by aagapov on 11.10.2026.
-//
-
 #include "motion/motion.h"
 
 #include <cmath>

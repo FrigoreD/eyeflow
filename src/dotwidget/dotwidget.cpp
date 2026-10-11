@@ -1,8 +1,4 @@
-//
-// Created by aagapov on 11.10.2026.
-//
-
-#include "dotwidget.h"
+#include "dotwidget/dotwidget.h"
 #include "motion/motion.h"
 #include <QPainter>
 #include <chrono>

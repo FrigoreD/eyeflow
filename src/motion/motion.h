@@ -1,7 +1,3 @@
-//
-// Created by aagapov on 11.10.2026.
-//
-
 #ifndef EYEFLOW_MOTION_H
 #define EYEFLOW_MOTION_H
 
