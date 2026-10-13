@@ -3,6 +3,7 @@
 
 namespace motion {
     double oscillation(double phase);
+    double fadeOpacity(double activeMs, double sessionDurationMs, double fadeDurationMs);
 }
 
 

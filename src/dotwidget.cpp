@@ -11,6 +11,7 @@ namespace {
     constexpr qreal kPeriodStep{1.2};
     constexpr auto kFrameInterval{8ms};
     constexpr qreal kAmplitudeRatio{0.4};
+    constexpr double kFadeDurationMs{1500.0};
 }
 
 DotWidget::DotWidget(const Settings &settings, QWidget *parent) : QWidget{parent}, m_periodSec{settings.periodSec},
@@ -28,6 +29,13 @@ void DotWidget::paintEvent(QPaintEvent */*event*/) {
     const QPointF center{rect().center()};
     const qreal offset{amplitude * motion::oscillation(m_phase)};
     const QPointF dotCenter{offset + center.x(), center.y()};
+    const double opacity{
+        motion::fadeOpacity(
+            static_cast<double>(m_activeMs),
+            static_cast<double>(m_settings.sessionDurationSec * 1000),
+            kFadeDurationMs
+        )
+    };
 
     QRadialGradient gradient{dotCenter, m_settings.dotRadius};
     gradient.setColorAt(0.0, QColor{255, 200, 140});
@@ -39,6 +47,7 @@ void DotWidget::paintEvent(QPaintEvent */*event*/) {
     painter.setBrush(gradient);
     painter.setPen(Qt::NoPen);
     painter.fillRect(rect(), QColor{0, 0, 0});
+    painter.setOpacity(opacity);
 
     painter.drawEllipse(dotCenter, m_settings.dotRadius, m_settings.dotRadius);
 }
