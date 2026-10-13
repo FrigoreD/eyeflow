@@ -41,12 +41,10 @@ void DotWidget::paintEvent(QPaintEvent *event) {
     painter.fillRect(rect(), QColor{0, 0, 0});
 
     painter.drawEllipse(dotCenter, kDotRadius, kDotRadius);
-
-    QWidget::paintEvent(event);
 }
 
 void DotWidget::keyPressEvent(QKeyEvent *event) {
-    int key = event->key();
+    const int key{event->key()};
     qDebug() << "key pressed:" << key;
 }
 
