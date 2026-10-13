@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "dotwidget/dotwidget.h"
+#include "dotwidget.h"
 
 int main(int argc, char *argv[]) {
     QApplication app{argc, argv};

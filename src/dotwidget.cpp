@@ -1,5 +1,5 @@
-#include "dotwidget/dotwidget.h"
-#include "motion/motion.h"
+#include "dotwidget.h"
+#include "motion.h"
 #include <QPainter>
 #include <chrono>
 #include <QKeyEvent>

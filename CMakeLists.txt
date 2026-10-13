@@ -9,10 +9,10 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 set(CMAKE_AUTOMOC ON)
 
 add_executable(eyeflow src/main.cpp
-        src/dotwidget/dotwidget.cpp
-        src/dotwidget/dotwidget.h
-        src/motion/motion.cpp
-        src/motion/motion.h
+        src/dotwidget.cpp
+        src/dotwidget.h
+        src/motion.cpp
+        src/motion.h
 )
 target_link_libraries(eyeflow PRIVATE Qt6::Widgets)
 target_compile_options(eyeflow PRIVATE -Wall -Wextra -Wconversion -Wshadow)
