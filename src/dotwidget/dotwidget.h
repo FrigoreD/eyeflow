@@ -4,7 +4,6 @@
 #include <QTimer>
 #include <QElapsedTimer>
 
-
 class DotWidget : public QWidget {
     Q_OBJECT
 
@@ -23,6 +22,7 @@ private:
     qreal m_phase{0.0};
     qint64 m_lastTickMs{0};
     qreal m_periodSec{0.0};
+    bool m_paused{false};
 };
 
 
