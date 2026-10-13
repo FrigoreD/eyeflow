@@ -18,7 +18,11 @@ protected:
 private:
     QTimer m_timer;
     QElapsedTimer m_elapsedTimer;
-    qreal m_phase;
+    qreal m_phase{0.0};
+    qint64 m_lastTickMs{0};
+    qreal m_periodSec{0.0};
+
+    void tick();
 };
 
 

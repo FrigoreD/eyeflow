@@ -14,8 +14,8 @@ namespace {
     constexpr qreal kDotRadius{50.0};
 }
 
-DotWidget::DotWidget(QWidget *parent) : QWidget{parent} {
-    connect(&m_timer, &QTimer::timeout, this, [this]() { update(); });
+DotWidget::DotWidget(QWidget *parent) : QWidget{parent}, m_periodSec{kPeriodSec} {
+    connect(&m_timer, &QTimer::timeout, this, &DotWidget::tick);
     m_timer.start(kFrameInterval);
     m_elapsedTimer.start();
 
@@ -26,8 +26,7 @@ DotWidget::DotWidget(QWidget *parent) : QWidget{parent} {
 void DotWidget::paintEvent(QPaintEvent *event) {
     const qreal amplitude{kAmplitudeRatio * rect().width()};
     const QPointF center{rect().center()};
-    const qreal seconds{static_cast<qreal>(m_elapsedTimer.elapsed()) / 1000.0};
-    const qreal offset{amplitude * motion::oscillation(seconds, kPeriodSec)};
+    const qreal offset{amplitude * motion::oscillation(m_phase)};
     const QPointF dotCenter{offset + center.x(), center.y()};
 
     QRadialGradient gradient{dotCenter, kDotRadius};
@@ -49,4 +48,13 @@ void DotWidget::paintEvent(QPaintEvent *event) {
 void DotWidget::keyPressEvent(QKeyEvent *event) {
     int key = event->key();
     qDebug() << "key pressed:" << key;
+}
+
+void DotWidget::tick() {
+    const qint64 nowMs{m_elapsedTimer.elapsed()};
+    const qint64 dt{nowMs - m_lastTickMs};
+    m_lastTickMs = nowMs;
+
+    m_phase += static_cast<qreal>(dt) / 1000.0 / m_periodSec;
+    update();
 }

@@ -2,7 +2,7 @@
 #define EYEFLOW_MOTION_H
 
 namespace motion {
-    double oscillation(double seconds, double periodSec);
+    double oscillation(double phase);
 }
 
 
