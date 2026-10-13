@@ -4,7 +4,9 @@
 
 int main(int argc, char *argv[]) {
     QApplication app{argc, argv};
-    DotWidget window{};
+
+    constexpr Settings settings{};
+    DotWidget window{settings};
     window.show();
 
     return app.exec();

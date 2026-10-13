@@ -10,14 +10,13 @@ using namespace std::chrono_literals;
 namespace {
     constexpr qreal kPeriodMinSec{0.5};
     constexpr qreal kPeriodMaxSec{8.0};
-    constexpr qreal kPeriodSec{2.0};
     constexpr qreal kPeriodStep{1.2};
     constexpr auto kFrameInterval{8ms};
     constexpr qreal kAmplitudeRatio{0.4};
-    constexpr qreal kDotRadius{50.0};
 }
 
-DotWidget::DotWidget(QWidget *parent) : QWidget{parent}, m_periodSec{kPeriodSec} {
+DotWidget::DotWidget(const Settings &settings, QWidget *parent) : QWidget{parent}, m_periodSec{settings.periodSec},
+                                                                  m_settings{settings} {
     connect(&m_timer, &QTimer::timeout, this, &DotWidget::tick);
     m_timer.start(kFrameInterval);
     m_elapsedTimer.start();
@@ -32,7 +31,7 @@ void DotWidget::paintEvent(QPaintEvent */*event*/) {
     const qreal offset{amplitude * motion::oscillation(m_phase)};
     const QPointF dotCenter{offset + center.x(), center.y()};
 
-    QRadialGradient gradient{dotCenter, kDotRadius};
+    QRadialGradient gradient{dotCenter, m_settings.dotRadius};
     gradient.setColorAt(0.0, QColor{255, 200, 140});
     gradient.setColorAt(0.7, QColor{255, 130, 40});
     gradient.setColorAt(1.0, QColor{255, 130, 40, 0});
@@ -43,7 +42,7 @@ void DotWidget::paintEvent(QPaintEvent */*event*/) {
     painter.setPen(Qt::NoPen);
     painter.fillRect(rect(), QColor{0, 0, 0});
 
-    painter.drawEllipse(dotCenter, kDotRadius, kDotRadius);
+    painter.drawEllipse(dotCenter, m_settings.dotRadius, m_settings.dotRadius);
 }
 
 void DotWidget::keyPressEvent(QKeyEvent *event) {
