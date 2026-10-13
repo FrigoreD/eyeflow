@@ -2,6 +2,8 @@
 #include "motion/motion.h"
 #include <QPainter>
 #include <chrono>
+#include <QKeyEvent>
+#include <QDebug>
 
 using namespace std::chrono_literals;
 
@@ -21,7 +23,7 @@ DotWidget::DotWidget(QWidget *parent) : QWidget{parent} {
     setWindowTitle("EyeFlow");
 }
 
-void DotWidget::paintEvent(QPaintEvent * /*event*/) {
+void DotWidget::paintEvent(QPaintEvent *event) {
     const qreal amplitude{kAmplitudeRatio * rect().width()};
     const QPointF center{rect().center()};
     const qreal seconds{static_cast<qreal>(m_elapsedTimer.elapsed()) / 1000.0};
@@ -40,4 +42,11 @@ void DotWidget::paintEvent(QPaintEvent * /*event*/) {
     painter.fillRect(rect(), QColor{0, 0, 0});
 
     painter.drawEllipse(dotCenter, kDotRadius, kDotRadius);
+
+    QWidget::paintEvent(event);
+}
+
+void DotWidget::keyPressEvent(QKeyEvent *event) {
+    int key = event->key();
+    qDebug() << "key pressed:" << key;
 }

@@ -13,10 +13,12 @@ public:
 
 protected:
     void paintEvent(QPaintEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     QTimer m_timer;
     QElapsedTimer m_elapsedTimer;
+    qreal m_phase;
 };
 
 
