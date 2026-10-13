@@ -12,6 +12,7 @@ namespace {
     constexpr auto kFrameInterval{8ms};
     constexpr qreal kAmplitudeRatio{0.4};
     constexpr double kFadeDurationMs{1500.0};
+    constexpr int kHeightRatio{5};
 }
 
 DotWidget::DotWidget(const Settings &settings, QWidget *parent) : QWidget{parent}, m_periodSec{settings.periodSec},
@@ -20,7 +21,8 @@ DotWidget::DotWidget(const Settings &settings, QWidget *parent) : QWidget{parent
     m_timer.start(kFrameInterval);
     m_elapsedTimer.start();
 
-    resize(QSize{1600, 600});
+    const QRect screenArea{screen()->availableGeometry()};
+    resize(QSize{screenArea.width(), screenArea.height() / kHeightRatio});
     setWindowTitle("EyeFlow");
 }
 
