@@ -14,6 +14,7 @@ add_executable(eyeflow src/main.cpp
         src/motion.cpp
         src/motion.h
         src/settings.h
+        src/settings.cpp
 )
 target_link_libraries(eyeflow PRIVATE Qt6::Widgets)
 target_compile_options(eyeflow PRIVATE -Wall -Wextra -Wconversion -Wshadow)

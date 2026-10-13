@@ -8,8 +8,6 @@
 using namespace std::chrono_literals;
 
 namespace {
-    constexpr qreal kPeriodMinSec{0.5};
-    constexpr qreal kPeriodMaxSec{8.0};
     constexpr qreal kPeriodStep{1.2};
     constexpr auto kFrameInterval{8ms};
     constexpr qreal kAmplitudeRatio{0.4};
@@ -55,10 +53,10 @@ void DotWidget::keyPressEvent(QKeyEvent *event) {
             m_paused = !m_paused;
             break;
         case Qt::Key_Up:
-            m_periodSec = std::clamp(m_periodSec / kPeriodStep, kPeriodMinSec, kPeriodMaxSec);
+            m_periodSec = std::clamp(m_periodSec / kPeriodStep, Settings::kPeriodMinSec, Settings::kPeriodMaxSec);
             break;
         case Qt::Key_Down:
-            m_periodSec = std::clamp(m_periodSec * kPeriodStep, kPeriodMinSec, kPeriodMaxSec);
+            m_periodSec = std::clamp(m_periodSec * kPeriodStep, Settings::kPeriodMinSec, Settings::kPeriodMaxSec);
             break;
         case Qt::Key_Escape:
             close();

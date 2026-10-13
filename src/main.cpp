@@ -5,7 +5,7 @@
 int main(int argc, char *argv[]) {
     QApplication app{argc, argv};
 
-    constexpr Settings settings{};
+    const Settings settings{parseCommandLine(app.arguments())};
     DotWidget window{settings};
     window.show();
 
