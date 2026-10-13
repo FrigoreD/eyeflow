@@ -22,6 +22,7 @@ private:
     QElapsedTimer m_elapsedTimer;
     qreal m_phase{0.0};
     qint64 m_lastTickMs{0};
+    qint64 m_activeMs{0};
     qreal m_periodSec{0.0};
     Settings m_settings;
     bool m_paused{false};

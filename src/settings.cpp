@@ -17,16 +17,21 @@ Settings parseCommandLine(const QStringList &arguments) {
         "pixels",
         QString::number(settings.dotRadius)
     };
+    const QCommandLineOption durationOption{
+        {"d", "duration"},
+        "Session duration",
+        "seconds",
+        QString::number(settings.sessionDurationSec)
+    };
 
     parser.addHelpOption();
-    parser.addOptions({periodOption, radiusOption});
+    parser.addOptions({periodOption, radiusOption, durationOption});
     parser.process(arguments);
 
     if (parser.isSet(periodOption)) {
         bool ok{false};
         const qreal period{parser.value(periodOption).toDouble(&ok)};
 
-        // Written as "not inside the range" so that NaN is rejected too.
         if (!ok || !(period >= Settings::kPeriodMinSec && period <= Settings::kPeriodMaxSec)) {
             QCommandLineParser::showMessageAndExit(
                 QCommandLineParser::MessageType::Error,
@@ -53,6 +58,21 @@ Settings parseCommandLine(const QStringList &arguments) {
         }
 
         settings.dotRadius = radius;
+    }
+
+    if (parser.isSet(durationOption)) {
+        bool ok{false};
+        const qint64 duration{parser.value(durationOption).toInt(&ok)};
+
+        if (!ok || duration <= 0) {
+            QCommandLineParser::showMessageAndExit(
+                QCommandLineParser::MessageType::Error,
+                "--duration must be a positive number\n",
+                1
+            );
+        }
+
+        settings.sessionDurationSec = duration;
     }
 
     return settings;

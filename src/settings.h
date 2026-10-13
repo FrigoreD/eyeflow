@@ -13,6 +13,7 @@ struct Settings {
 
     qreal periodSec{2.0};
     qreal dotRadius{50.0};
+    qint64 sessionDurationSec{5};
 };
 
 Settings parseCommandLine(const QStringList &arguments);

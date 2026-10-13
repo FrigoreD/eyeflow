@@ -73,6 +73,12 @@ void DotWidget::tick() {
     m_lastTickMs = nowMs;
 
     if (!m_paused) {
+        m_activeMs += dt;
+        if (m_activeMs >= m_settings.sessionDurationSec * 1000) {
+            close();
+            m_timer.stop();
+            return;
+        }
         m_phase += static_cast<qreal>(dt) / 1000.0 / m_periodSec;
     }
 
